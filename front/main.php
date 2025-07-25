@@ -82,16 +82,46 @@ $(".poster").eq(rank).show()
 
 
 let slider=setInterval(()=>{
-    rank++;
+    animater()
+/*         rank++;
     if(rank>$(".poster").length-1){
         rank=0;
     }
     $(".poster").hide();
-    $(".poster").eq(rank).show();
-
-
+    $(".poster").eq(rank).show(); */
 },2000)
 
+
+function animater(){
+ let now=$(".poster:visible");
+ rank++;
+ if(rank>$(".poster").length-1){
+    rank=0;
+ }
+ 
+ let next=$(".poster").eq(rank);
+ let ani=$(now).data('ani');
+console.log(ani);
+ switch(ani){
+    case 1:
+        //淡入淡出
+        $(now).fadeOut(1000);
+        $(next).fadeIn(1000);
+
+
+    break;
+    case 2:
+        $(now).fadeOut(1000);
+        $(next).fadeIn(1000);
+
+    break;
+    case 3:
+        $(now).fadeOut(1000);
+        $(next).fadeIn(1000);
+
+    break;
+ }
+}
 
 </script>
 
