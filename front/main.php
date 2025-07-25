@@ -110,20 +110,35 @@ $(".poster").eq(rank).show()
 
 let slider=setInterval(()=>{
     animater()
-/*         rank++;
-    if(rank>$(".poster").length-1){
-        rank=0;
-    }
-    $(".poster").hide();
-    $(".poster").eq(rank).show(); */
 },2000)
 
+$(".btns").hover(
+    function(){
+        clearInterval(slider);
+    }
+    ,
+    function(){
+        slider=setInterval(()=>{
+        animater()
+        },2000)
+    }
+)
 
-function animater(){
+$(".poster-btn").on("click",function(){
+    let idx=$(this).index();
+    animater(idx);
+})
+
+function animater(r){
  let now=$(".poster:visible");
- rank++;
- if(rank>$(".poster").length-1){
-    rank=0;
+
+ if(r==undefined){
+     rank++;
+     if(rank>$(".poster").length-1){
+        rank=0;
+     }
+ }else{
+    rank=r;
  }
  
  let next=$(".poster").eq(rank);
