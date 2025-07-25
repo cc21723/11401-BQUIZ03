@@ -59,7 +59,7 @@
                     <?php 
                     foreach($posters as $poster):
                     ?>
-                    <div class="poster">
+                    <div class="poster" data-ani='<?=$poster['ani'];?>'    data-id='<?=$poster['id'];?>'>
                         <img src="./image/<?=$poster['img'];?>" >
                         <div><?=$poster['name'];?></div>
                     </div>
@@ -77,7 +77,22 @@
         </div>
     </div>
 <script>
-$(".poster").eq(0).show()    
+let rank=0;
+$(".poster").eq(rank).show()    
+
+
+let slider=setInterval(()=>{
+    rank++;
+    if(rank>$(".poster").length-1){
+        rank=0;
+    }
+    $(".poster").hide();
+    $(".poster").eq(rank).show();
+
+
+},2000)
+
+
 </script>
 
 
