@@ -194,11 +194,14 @@ $(".left,.right").on("click",function(){
 }    
 .movie{
     width:48%;
+    display:flex;
     box-sizing: border-box;
     border: 1px solid #ccc;
     min-height:100px;
     border-radius:3px;
     padding:3px;
+    font-size:12px;
+    flex-wrap:wrap;
 }
 </style>
 
@@ -206,12 +209,33 @@ $(".left,.right").on("click",function(){
         <h1>院線片清單</h1>
         <div class="rb tab" style="width:95%;">
             <div class='movie-list'>
+            <?php 
+            $today=date("Y-m-d");
+            $ondate=date("Y-m-d",strtotime("-2 days",strtotime($today)));
+            $movies=$Movie->all(['sh'=>1]," and ondate between '$ondate' and '$today' order by `rank`");
+            foreach($movies as $movie):
+            ?>
                 <div class="movie">
-
-
-                
+                <div><img src="./image/<?=$movie['poster'];?>" style="width:60px;height:70px;border:2px solid white"></div>
+                <div>
+                    <div style='font-size:14px;'><?=$movie['name'];?></div>
+                    <div>分級:
+                        <img src="./icon/03C0<?=$movie['level'];?>.png" style="width:16px;">
+                        <?=$leveStr[$movie['level']];?>
+                    </div>
+                    <div>上映日期:<?=$movie['ondate'];?></div>
+                </div>
+                <div>
+                    <button>劇情簡介</button>
+                    <button>線上訂票</button>
                 </div>
 
+
+
+                </div>
+            <?php
+            endforeach;
+            ?>
             </div>
             <div class="ct">1 2 3 </div>
         </div>
