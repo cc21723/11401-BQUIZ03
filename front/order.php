@@ -17,7 +17,7 @@
 }
 #orderForm td:nth-child(2) select{
     width:98%;
-    text-align:right;
+    text-align:left;
 }
 </style>
 
@@ -39,3 +39,23 @@
     <button>確定</button>
     <button>重置</button>
 </div>
+
+<script>
+let url=new URLSearchParams(location.search);
+
+getMovies();
+
+function getMovies(){
+    let id=0
+if(url.has('id')){
+    id=url.get('id');
+}
+
+$.get("./api/get_movies.php",{id},(movies)=>{
+    $("#movie").html(movies)
+})
+
+
+}
+
+</script>
