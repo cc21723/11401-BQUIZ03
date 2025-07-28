@@ -212,11 +212,19 @@ $(".left,.right").on("click",function(){
             <?php 
             $today=date("Y-m-d");
             $ondate=date("Y-m-d",strtotime("-2 days",strtotime($today)));
-            $movies=$Movie->all(['sh'=>1]," and ondate between '$ondate' and '$today' order by `rank`");
+            $total=$Movie->count(['sh'=>1]," and ondate between '$ondate' and '$today'");
+            $div=4;
+            $pages=ceil($total/$div);
+            $now=$_GET['p']??1;
+            $start=($now-1)*$div;
+
+            $movies=$Movie->all(['sh'=>1]," and ondate between '$ondate' and '$today' order by `rank` limit $start,$div");
             foreach($movies as $movie):
             ?>
                 <div class="movie">
-                <div><img src="./image/<?=$movie['poster'];?>" style="width:60px;height:70px;border:2px solid white"></div>
+                <div onclick="location.href='?do=intro&id=<?=$movie['id']?>'">
+                    <img src="./image/<?=$movie['poster'];?>" style="width:60px;height:70px;border:2px solid white">
+                </div>
                 <div>
                     <div style='font-size:14px;'><?=$movie['name'];?></div>
                     <div>分級:
@@ -226,8 +234,8 @@ $(".left,.right").on("click",function(){
                     <div>上映日期:<?=$movie['ondate'];?></div>
                 </div>
                 <div>
-                    <button>劇情簡介</button>
-                    <button>線上訂票</button>
+                    <button onclick="location.href='?do=intro&id=<?=$movie['id']?>'">劇情簡介</button>
+                    <button onclick="location.href='?do=order&id=<?=$movie['id']?>'">線上訂票</button>
                 </div>
 
 
@@ -237,6 +245,21 @@ $(".left,.right").on("click",function(){
             endforeach;
             ?>
             </div>
-            <div class="ct">1 2 3 </div>
+            <div class="ct">
+                <?php 
+                if($now-1>0){
+                    echo "<a href='?p=".($now-1)."'> < </a>";
+                }
+
+                for($i=1;$i<=$pages;$i++){
+                    $size=($i==$now)?'24px':'16px';
+                    echo "<a href='?p=$i' style='font-size:$size;'>$i</a>";
+                }
+
+                if($now+1<=$pages){
+                    echo "<a href='?p=".($now+1)."'> > </a>";
+                    }
+                ?>
+            </div>
         </div>
     </div>
