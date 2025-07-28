@@ -45,6 +45,10 @@ let url=new URLSearchParams(location.search);
 
 getMovies();
 
+$("#movie").on("change",function(){
+    getDates($(this).val())
+})
+
 function getMovies(){
     let id=0
 if(url.has('id')){
@@ -53,9 +57,19 @@ if(url.has('id')){
 
 $.get("./api/get_movies.php",{id},(movies)=>{
     $("#movie").html(movies)
+
+    getDates($("#movie").val());
 })
 
 
 }
 
+
+function getDates(movieId){
+
+    $.get("./api/get_dates.php",{movieId},(dates)=>{
+        $("#date").html(dates)
+    })
+
+}
 </script>
