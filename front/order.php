@@ -69,7 +69,15 @@ function getDates(movieId){
 
     $.get("./api/get_dates.php",{movieId},(dates)=>{
         $("#date").html(dates)
+
+        getSessions(movieId,$("#date").val())
     })
 
+}
+
+function getSessions(movieId , date){
+    $.get("./api/get_sessions.php",{movieId,date},(sessions)=>{
+        $("#session").html(sessions)
+    })
 }
 </script>
