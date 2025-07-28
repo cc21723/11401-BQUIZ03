@@ -48,6 +48,9 @@ getMovies();
 $("#movie").on("change",function(){
     getDates($(this).val())
 })
+$("#date").on("change",function(){
+    getSessions($("#movie").val(),$(this).val())
+})
 
 function getMovies(){
     let id=0

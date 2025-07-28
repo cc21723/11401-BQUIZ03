@@ -3,8 +3,8 @@
 $id=$_GET['movieId'];
 $date=$_GET['date'];
 $movies=$Movie->find($id);
-$ondate=strtotime($movies['ondate']);
-$today=strtotime(date("Y-m-d"));
+/* $ondate=strtotime($movies['ondate']);
+$today=strtotime(date("Y-m-d")); */
 
 $start=0;
 $hr=date("G");
