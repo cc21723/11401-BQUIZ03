@@ -1,3 +1,4 @@
+<?php include_once "db.php";?>
 <style>
     .booking-box{
         width:540px;
@@ -68,8 +69,8 @@
 
 <div class="info-box">
 <div class="order-info">
-    <div>您選擇的電影是：</div>
-    <div>您選擇的時刻是：</div>
+    <div>您選擇的電影是：<?=$Movie->find($_GET['id'])['name'];?></div>
+    <div>您選擇的時刻是：<?=$_GET['date'];?> <?=$_GET['session'];?></div>
     <div>您己經勾選<span id="tickets">0</span>張票，最多可以購買四張票</div>
 </div>
 
@@ -99,5 +100,17 @@
         //console.log(selectedSeats);
         $("#tickets").text(selectedSeats.length);
 
+    })
+
+    $(".btn-order").on("click",function(){
+        $.post("./api/booking.php",{
+            movie:"<?=$Movie->find($_GET['id'])['name'];?>",
+            date:"<?=$_GET['date'];?>",
+            session:"<?=$_GET['session'];?>",
+            seats:selectedSeats
+        },(no)=>{
+            console.log(no)
+            location.href=`?do=result&no=${no}`;
+        })
     })
 </script>
