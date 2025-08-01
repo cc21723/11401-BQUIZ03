@@ -2,7 +2,24 @@
 $order=$Order->find(['no'=>$_GET['no']]);
 
 ?>
+<style>
+    .result-table{
+        width:540px;
+        margin:20px auto;
+        padding:20px;
+        border:1px solid #ccc;
+        background:#eee;
+    }
+    .result-table td{
+        padding:5px 2px;
+        border:1px solid #ccc;
+    }
 
+    .result-table tr:nth-child(even) td:nth-child(1){
+        background:#aaa;
+        width:20%;
+    }
+</style>
 <table class="result-table">
     <tr>
         <td colspan="2">感謝您的訂購，您的訂單編號是：<?=$_GET['no'];?></td>
@@ -37,7 +54,7 @@ $order=$Order->find(['no'=>$_GET['no']]);
         </td>
     </tr>
     <tr>
-        <td colspan="2">
+        <td colspan="2" class='ct'>
             <button onclick="location.href='index.php'">確認</button>
         </td>
 
