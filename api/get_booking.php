@@ -78,3 +78,26 @@
     <button class='btn-order'>訂購</button>
 </div>
 </div>
+
+<script>
+    let selectedSeats=[];
+    $(".seat input[type='checkbox']").on("change",function(){
+        //console.log($(this).prop("checked"),$(this).val());
+        
+        if($(this).prop("checked")){
+            if(selectedSeats.length <4){
+                selectedSeats.push($(this).val());
+               // $(this).parent().removeClass("null").addClass("booked");
+            }else{
+                alert("最多只能選擇四張票");
+                $(this).prop("checked",false);
+            }
+        }else{
+            selectedSeats.splice(selectedSeats.indexOf($(this).val()),1)
+          //  $(this).parent().removeClass("booked").addClass("null");
+        }
+        //console.log(selectedSeats);
+        $("#tickets").text(selectedSeats.length);
+
+    })
+</script>
