@@ -39,14 +39,22 @@
         height:86px;
         box-sizing:border-box;
     }
+    .booked{
+        background:url("./icon/03D03.png") no-repeat center;
+    }
+    .null{
+        background:url("./icon/03D02.png") no-repeat center;
+    }
 </style>
 
 <div class="booking-box">
  <div id="seats">
     <?php
     for($i=0;$i<20;$i++):
+        
+        $booked='null';
     ?>
-    <div class="seat">
+    <div class="seat <?=$booked;?>">
         <div><?=floor($i/5)+1;?>排<?=($i%5)+1;?>號</div>
         <input type="checkbox" name="seat" value="<?=$i;?>">
     </div>
