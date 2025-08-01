@@ -109,7 +109,7 @@
             session:"<?=$_GET['session'];?>",
             seats:selectedSeats
         },(no)=>{
-            console.log(no)
+           // console.log(no)
             location.href=`?do=result&no=${no}`;
         })
     })
